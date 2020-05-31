@@ -15,8 +15,8 @@ from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 from sklearn import svm, neighbors
 import shutil
 
-# Reset All Variables
-
+# Reset All Variables (After first instance of running code uncomment this section to clear variables)
+"""
 style.use('ggplot')
 os.remove('sp500_joined_closes.csv')
 try:
@@ -24,7 +24,7 @@ try:
 except OSError as e:
     print("Error: %s : %s" % ('sp500_stock_dfs', e.strerror))
 os.remove('sp500tickers.pickle')
-
+"""
 
 def save_sp500_tickers():
     resp = requests.get('http://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
@@ -90,6 +90,9 @@ def compile_data():
 
 compile_data()
 
+#This Section will visulize the data if required to show the correlation between the stocks
+
+"""
 def visualize_data():
     df = pd.read_csv('sp500_joined_closes.csv')
     df_corr = df.corr()
@@ -115,7 +118,8 @@ def visualize_data():
     plt.tight_layout()
     plt.show()
 
-#visualize_data()
+visualize_data()
+"""
 
 def process_data_for_labels(ticker):
     hm_days = 7
@@ -184,11 +188,7 @@ def do_ml(ticker):
     print()
     print()
     return confidence
-"""
-do_ml('NFLX')
-do_ml('AAPL')
-do_ml('MSFT')
-"""
+
 from statistics import mean
 
 with open("sp500tickers.pickle","rb") as f:
