@@ -11,6 +11,7 @@ from matplotlib import style
 import numpy as np 
 from collections import Counter
 from sklearn.model_selection import train_test_split
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 from sklearn import svm, neighbors
 import shutil
@@ -178,7 +179,8 @@ def do_ml(ticker):
 
     clf = VotingClassifier([('lsvc', svm.LinearSVC()),
                             ('knn', neighbors.KNeighborsClassifier()),
-                            ('rfor', RandomForestClassifier())])
+                            ('rfor', RandomForestClassifier()),
+                            ('lda',LinearDiscriminantAnalysis())])
 
     clf.fit(X_train, y_train)
     confidence = clf.score(X_test, y_test)
